@@ -1,0 +1,16 @@
+ * package versioning
+ * per-compiler warning flags
+ * config headers?
+ * clang-tidy
+ * clang-check
+ * clang sanitizers
+ * clang-format
+ * travis
+ * appveyor
+ * git diff --check
+ * valgrind
+ * doxygen/standardese
+
+MAYBE:
+ * Codecov/Coveralls
+ * Codacy/Coverity Scan
