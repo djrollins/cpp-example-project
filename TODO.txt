@@ -1,5 +1,3 @@
- * package versioning
- * per-compiler warning flags
  * config headers?
  * clang-tidy
  * clang-check

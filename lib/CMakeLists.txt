@@ -5,6 +5,9 @@ project(foo VERSION 0.0.2)
 add_library(foo src/bar.cpp)
 add_library(foo::foo ALIAS foo)
 
+include(cmake/compile_flags.cmake)
+target_add_compile_flags(foo)
+
 target_include_directories(foo
 	PUBLIC
 		$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
