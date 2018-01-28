@@ -1,9 +1,10 @@
  * config headers?
- * clang-tidy
- * clang-check
- * clang sanitizers
+ * clang-tidy // run from command line after -DEXPORT_COMPILE_COMMANDS
+ * clang-check // ditto
+ * clang sanitizers // -DCMAKE_CXX_FLAGS=-fsanitize={undefined,address,thread}
  * clang-format
- * travis
+ * travis // got compilers, just need sanitizers
+ * catch unit tests
  * appveyor
  * git diff --check
  * valgrind

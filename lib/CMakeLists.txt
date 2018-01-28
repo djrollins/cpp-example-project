@@ -6,7 +6,9 @@ add_library(foo src/bar.cpp)
 add_library(foo::foo ALIAS foo)
 
 include(cmake/compile_flags.cmake)
-target_add_compile_flags(foo)
+if (${ADD_COMMON_COMPILER_WARNINGS})
+	target_add_compile_flags(foo)
+endif()
 
 target_include_directories(foo
 	PUBLIC

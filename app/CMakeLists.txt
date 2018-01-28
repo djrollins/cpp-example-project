@@ -5,7 +5,9 @@ project(app LANGUAGES CXX)
 add_executable(exe src/main.cpp)
 
 include(cmake/compile_flags.cmake)
-target_add_compile_flags(exe)
+if (${ADD_COMMON_COMPILER_WARNINGS})
+	target_add_compile_flags(exe)
+endif()
 
 find_package(foo 0.0.1 REQUIRED)
 

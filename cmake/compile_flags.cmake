@@ -1,5 +1,10 @@
 # This module provides functions that add compiler flags to a target based on
 # the detected compiler vendor.
+# Also provides the ADD_COMMON_COMPILER_WARNINGS option which should be queried
+# client projects before calling any function in this script.
+
+option(ADD_COMMON_COMPILER_WARNINGS "Add compiler-specific warnings to target" OFF)
+option(ENABLE_WERROR "Emit build failure on error" OFF)
 
 include(CheckCXXCompilerFlag)
 
@@ -43,6 +48,10 @@ function(target_add_common_nix_compile_flags target)
 	target_add_compile_options_checked(${target}
 		-Wshift-negative-value
 		-Wnull-dereference)
+
+	if (${ENABLE_WERROR})
+		target_compile_options(${target} PRIVATE -Werror)
+	endif()
 endfunction()
 
 function(target_add_clang_compile_flags target)
