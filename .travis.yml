@@ -1,0 +1,8 @@
+language: cpp
+dist: trusty
+
+compiler:
+    - clang
+    - gcc
+
+script: cmake -H. -Bbuild && cmake --build build -- -j2
