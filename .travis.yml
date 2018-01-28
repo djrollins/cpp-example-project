@@ -84,10 +84,7 @@ jobs:
     - stage: santizers
       os: linux
       env:
-          matrix: 
-            - SANITIZER="undefined"
-            - SANITIZER="address"
-            - SANITIZER="thread"
+        - SANITIZER="undefined"
       addons:
         apt:
           sources:
@@ -98,5 +95,44 @@ jobs:
         - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=$SANITIZER" -H. -Bbuild
         - cmake --build build -- -j2
 
-    - stage: done
-      script: echo "Done!"
+    - stage: santizers
+      os: linux
+      env:
+        - SANITIZER="address"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=$SANITIZER" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: santizers
+      os: linux
+      env:
+        - SANITIZER="thread"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=$SANITIZER" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: "static analysis"
+      os: linux
+      env:
+        - TEST="Clang Tidy"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -H. -Bbuild
+        - run-clang-tidy -p build -checks=*
