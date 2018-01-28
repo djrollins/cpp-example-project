@@ -3,17 +3,22 @@
 
 include(CheckCXXCompilerFlag)
 
+macro(strip_and_upper_case flag name)
+	string(SUBSTRING ${flag} 1 -1 flag_0)
+    string(TOUPPER ${flag_0} flag_1)
+    string(REPLACE "-" "_" flag_2 ${flag_1})
+    string(REPLACE "+" "X" flag_3 ${flag_2})
+	string(REPLACE "=" "" flag_4 ${flag_3})
+	set(${name} ${flag_4})
+endmacro()
+
 function(target_add_compile_options_checked target)
-	message(STATUS "\nARGN: ${ARGN}\n")
 	foreach(flag IN LISTS ARGN)
-		message(STATUS "checking ${flag}")
-		set(has_flag "${target}_has_${flag}")
+		strip_and_upper_case(${flag} flag_name)
+		set(has_flag "${CMAKE_CXX_COMPILER_ID}_HAS_${flag_name}")
 		check_cxx_compiler_flag(${flag} ${has_flag})
-		message(STATUS "has_flag: ${has_flag}")
 		if(${has_flag})
 			target_compile_options(${target} PRIVATE ${flag})
-		else()
-			message(WARNING "skipping flag ${flag}")
 		endif()
 	endforeach()
 endfunction()
@@ -37,8 +42,7 @@ function(target_add_common_nix_compile_flags target)
 
 	target_add_compile_options_checked(${target}
 		-Wshift-negative-value
-		-Wnull-dereference
-		-doot)
+		-Wnull-dereference)
 endfunction()
 
 function(target_add_clang_compile_flags target)
