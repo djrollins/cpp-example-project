@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-project(foo VERSION 0.0.2)
+project(foo VERSION 0.0.2 LANGUAGES CXX)
 
 add_library(foo src/bar.cpp)
 add_library(foo::foo ALIAS foo)
