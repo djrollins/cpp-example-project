@@ -1,30 +1,103 @@
 language: cpp
 dist: trusty
 
-addons:
-    apt:
-        sources:
+jobs:
+  include:
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="G++ 5"
+      addons:
+        apt:
+          sources:
             - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-4.0
-            - llvm-toolchain-trusty-5.0
-        packages:
-            - gcc-5
+          packages:
             - g++-5
-            - gcc-6
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="g++-5" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="G++ 6"
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
             - g++-6
-            - gcc-7
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="g++-6" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="G++ 7"
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
             - g++-7
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="g++-7" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="Clang 4.0"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-4.0
+          packages:
             - clang-4.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-4.0" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="Clang 5.0"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
             - clang-5.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -H. -Bbuild
+        - cmake --build build -- -j2
 
-env:
-    - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
-    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-    - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
-    - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
-    - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+    - stage: compilers
+      os: osx
+      env:
+        - TEST="OSX"
+      script:
+        - cmake -H. -Bbuild
+        - cmake --build build -- -j2
     
-before_install:
-    - eval "${MATRIX_EVAL}"
+    - stage: compilers
+      os: linux
+      env:
+        - SANITIZER="undefined"
+        - SANITIZER="address"
+        - SANITIZER="thread"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=${SANITIZER}" -H. -Bbuild
+        - cmake --build build -- -j2
 
-script: cmake -H. -Bbuild && cmake --build build -- -j2
+
+
+    - stage: done
+      script: echo "Done!"
