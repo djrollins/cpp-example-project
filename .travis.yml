@@ -81,12 +81,10 @@ jobs:
         - cmake -H. -Bbuild
         - cmake --build build -- -j2
     
-    - stage: compilers
+    - stage: santizers
       os: linux
       env:
-        - SANITIZER="undefined"
-        - SANITIZER="address"
-        - SANITIZER="thread"
+        - TEST="UBSan"
       addons:
         apt:
           sources:
@@ -94,10 +92,8 @@ jobs:
           packages:
             - clang-5.0
       script:
-        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=${SANITIZER}" -H. -Bbuild
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=undefined" -H. -Bbuild
         - cmake --build build -- -j2
-
-
 
     - stage: done
       script: echo "Done!"
