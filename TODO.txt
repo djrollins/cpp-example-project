@@ -1,6 +1,6 @@
  * config headers?
- * clang-tidy // run from command line after -DEXPORT_COMPILE_COMMANDS
- * clang-check // ditto
+ * clang-tidy // done
+ * clang-check // run from command line after -DEXPORT_COMPILE_COMMANDS
  * clang sanitizers // -DCMAKE_CXX_FLAGS=-fsanitize={undefined,address,thread}
  * clang-format
  * travis // got compilers, just need sanitizers

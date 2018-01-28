@@ -3,125 +3,125 @@ dist: trusty
 
 jobs:
   include:
-      #    - stage: compilers
-      #      os: linux
-      #      env:
-      #        - TEST="G++ 5"
-      #      addons:
-      #        apt:
-      #          sources:
-      #            - ubuntu-toolchain-r-test
-      #          packages:
-      #            - g++-5
-      #      script:
-      #        - cmake -DCMAKE_CXX_COMPILER="g++-5" -H. -Bbuild
-      #        - cmake --build build -- -j2
-      #
-      #    - stage: compilers
-      #      os: linux
-      #      env:
-      #        - TEST="G++ 6"
-      #      addons:
-      #        apt:
-      #          sources:
-      #            - ubuntu-toolchain-r-test
-      #          packages:
-      #            - g++-6
-      #      script:
-      #        - cmake -DCMAKE_CXX_COMPILER="g++-6" -H. -Bbuild
-      #        - cmake --build build -- -j2
-      #
-      #    - stage: compilers
-      #      os: linux
-      #      env:
-      #        - TEST="G++ 7"
-      #      addons:
-      #        apt:
-      #          sources:
-      #            - ubuntu-toolchain-r-test
-      #          packages:
-      #            - g++-7
-      #      script:
-      #        - cmake -DCMAKE_CXX_COMPILER="g++-7" -H. -Bbuild
-      #        - cmake --build build -- -j2
-      #
-      #    - stage: compilers
-      #      os: linux
-      #      env:
-      #        - TEST="Clang 4.0"
-      #      addons:
-      #        apt:
-      #          sources:
-      #            - llvm-toolchain-trusty-4.0
-      #          packages:
-      #            - clang-4.0
-      #      script:
-      #        - cmake -DCMAKE_CXX_COMPILER="clang++-4.0" -H. -Bbuild
-      #        - cmake --build build -- -j2
-      #
-      #    - stage: compilers
-      #      os: linux
-      #      env:
-      #        - TEST="Clang 5.0"
-      #      addons:
-      #        apt:
-      #          sources:
-      #            - llvm-toolchain-trusty-5.0
-      #          packages:
-      #            - clang-5.0
-      #      script:
-      #        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -H. -Bbuild
-      #        - cmake --build build -- -j2
-      #
-      #    - stage: compilers
-      #      os: osx
-      #      env:
-      #        - TEST="OSX"
-      #      script:
-      #        - cmake -H. -Bbuild
-      #        - cmake --build build -- -j2
-      #    
-      #    - stage: santizers
-      #      os: linux
-      #      env:
-      #        - SANITIZER="undefined"
-      #      addons:
-      #        apt:
-      #          sources:
-      #            - llvm-toolchain-trusty-5.0
-      #          packages:
-      #            - clang-5.0
-      #      script:
-      #        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=$SANITIZER" -H. -Bbuild
-      #        - cmake --build build -- -j2
-      #
-      #    - stage: santizers
-      #      os: linux
-      #      env:
-      #        - SANITIZER="address"
-      #      addons:
-      #        apt:
-      #          sources:
-      #            - llvm-toolchain-trusty-5.0
-      #          packages:
-      #            - clang-5.0
-      #      script:
-      #        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=$SANITIZER" -H. -Bbuild
-      #        - cmake --build build -- -j2
-      #
-      #    - stage: santizers
-      #      os: linux
-      #      env:
-      #        - SANITIZER="thread"
-      #      addons:
-      #        apt:
-      #          sources:
-      #            - llvm-toolchain-trusty-5.0
-      #          packages:
-      #            - clang-5.0
-      #      script:
-      #        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=$SANITIZER" -H. -Bbuild
-      #        - cmake --build build -- -j2
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="G++ 5"
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="g++-5" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="G++ 6"
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-6
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="g++-6" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="G++ 7"
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="g++-7" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="Clang 4.0"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-4.0
+          packages:
+            - clang-4.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-4.0" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: compilers
+      os: linux
+      env:
+        - TEST="Clang 5.0"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: compilers
+      os: osx
+      env:
+        - TEST="OSX"
+      script:
+        - cmake -H. -Bbuild
+        - cmake --build build -- -j2
+    
+    - stage: santizers
+      os: linux
+      env:
+        - SANITIZER="undefined"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=$SANITIZER" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: santizers
+      os: linux
+      env:
+        - SANITIZER="address"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=$SANITIZER" -H. -Bbuild
+        - cmake --build build -- -j2
+
+    - stage: santizers
+      os: linux
+      env:
+        - SANITIZER="thread"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      script:
+        - cmake -DCMAKE_CXX_COMPILER="clang++-5.0" -DCMAKE_CXX_FLAGS="-fsanitize=$SANITIZER" -H. -Bbuild
+        - cmake --build build -- -j2
 
     - stage: "static analysis"
       os: linux
